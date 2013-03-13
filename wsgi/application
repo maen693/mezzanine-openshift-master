@@ -1,0 +1,13 @@
+import os, sys
+
+lib_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../libs'))
+sys.path.insert(0, os.path.join(lib_path, 'myblog'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'myblog.settings'
+
+virtenv = os.environ['APPDIR'] + '/virtenv/'
+os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.6/site-packages')
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+execfile(virtualenv, dict(__file__=virtualenv))
+
+from django.core.handlers.wsgi import WSGIHandler
+application = WSGIHandler()
